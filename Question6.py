@@ -4,7 +4,7 @@ import libvirt
 import time
 conn = libvirt.open('qemu:///system')
 
-threshhold = raw_input('Please enter the value of threshold in milliseconds')
+threshold = raw_input('Please enter the value of threshold in milliseconds')
 
 response = raw_input('Which parameter you want to choose to see the VMs, CPU (press c) or Memory (press m) ')
 
@@ -34,15 +34,15 @@ for id in conn.listDomainsID():
         #print(cpuStats2)
 	#cpuStats = cpuStats["vcpu_time"]
         cpuPercent =  (cpuTime2- cpuTime1)/3
-        print(cpuPercent)
-        print("Threshold is ")
-        print(threshhold)
-#        if cpuPercent > threshhold :
-        print('inside if')
-        localTime = time.asctime( time.localtime(time.time()) )
-        file = open('/home/asakhuj/hw2/log.txt','a+')
-        file.write("VM : "+str(domName) + " "+str(localTime) +" CPU Usage : in milliseconds "+str(cpuPercent));
-        file.write("\n") 
+        print("CPU percent is ",cpuPercent,"type : ",type(cpuPercent))
+        print("Threshold is ",threshold,"type is",type(threshold))
+        print(int(cpuPercent) > int(threshold))
+        if (int(cpuPercent) > int(threshold)) :
+            print('inside if')
+            localTime = time.asctime( time.localtime(time.time()) )
+            file = open('log.txt','a+')
+            file.write("VM : "+str(domName) + " "+str(localTime) +" CPU Usage : in milliseconds "+str(cpuPercent));
+            file.write("\n") 
         #print(cpuPercent)
 	newArr = []
 	newArr.append(domName)
