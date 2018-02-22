@@ -34,11 +34,11 @@ for id in conn.listDomainsID():
         #print(cpuStats2)
 	#cpuStats = cpuStats["vcpu_time"]
         cpuPercent =  (cpuTime2- cpuTime1)/3
-        print("CPU percent is ",cpuPercent,"type : ",type(cpuPercent))
-        print("Threshold is ",threshold,"type is",type(threshold))
-        print(int(cpuPercent) > int(threshold))
+        #print("CPU percent is ",cpuPercent,"type : ",type(cpuPercent))
+       # print("Threshold is ",threshold,"type is",type(threshold))
+       # print(int(cpuPercent) > int(threshold))
         if (int(cpuPercent) > int(threshold)) :
-            print('inside if')
+            #print('inside if')
             localTime = time.asctime( time.localtime(time.time()) )
             file = open('log.txt','a+')
             file.write("VM : "+str(domName) + " "+str(localTime) +" CPU Usage : in milliseconds "+str(cpuPercent));
@@ -53,13 +53,17 @@ for id in conn.listDomainsID():
 	#newArr.append(vcpuStats)
 	#print(newArr)
 	arr_vm.append(newArr)	
-#print('check')
-print(arr_vm)
+#print(arr_vm)
 arr_final = []
 if response == 'c' :
       arr_final = sorted(arr_vm,key=getCPUBased)
 else :
-     arr_final = sorted(arr_vm,key=getMemoryBased)
-print("Sorted array ")
-print(arr_final)	
-#file.close()
+     arr_final = sorted(arr_vm,key=getMemoryBased) 
+
+print("Sorted array ") 
+print(arr_final) 
+print("***************************")
+print("Printing VMs on the basis of criteria given by the user : In ASCENDING order")
+for i in range(len(arr_final)):
+        print(arr_final[i][0])
+
